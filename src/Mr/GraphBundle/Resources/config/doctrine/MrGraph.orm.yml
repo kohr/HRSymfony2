@@ -1,0 +1,37 @@
+Mr\GraphBundle\Entity\MrGraph:
+  type: entity
+  table: mr_graph
+  fields:
+    id:
+      id: true
+      type: integer
+      unsigned: false
+      nullable: false
+      generator:
+        strategy: IDENTITY
+    from_id:
+      type: integer
+    from_type:
+      type: string
+      length: 20
+    to_id:
+      type: integer
+    to_type:
+      type: string
+      length: 20
+    traffic:
+      type: integer
+    last_time:
+      type: date
+    created_at:
+      type: date
+      gedmo:
+        timestampable:
+          on: create
+    updated_at:
+      type: datetime
+      gedmo:
+        timestampable:
+          on: update
+      orphanRemoval: false
+  lifecycleCallbacks: {  }

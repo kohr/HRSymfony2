@@ -1,0 +1,28 @@
+services:
+    mr_hello.world.controller:
+        class: Mr\RestBundle\Controller\HelloController
+        arguments:
+            view: @fos_rest.view_handler
+            validator: @validator
+
+    mr_hello.extra.controller:
+        class: Mr\RestBundle\Controller\ExtraController
+
+    mr_hello.rest.controller:
+        class: Mr\RestBundle\Controller\RestController
+        arguments:
+            session: @session
+            formFactory: @form.factory
+
+    mr_hello.vie.controller:
+        class: Mr\RestBundle\Controller\VieController
+        arguments:
+            view: @fos_rest.view_handler
+
+    mr_hello.rss_handler:
+        class: Mr\RestBundle\View\RSSViewHandler
+
+    mr_hello.view_handler:
+        parent: fos_rest.view_handler.default
+        calls:
+            - ['registerHandler', [ 'rss', [@mr_hello.rss_handler, 'createResponse'] ] ]

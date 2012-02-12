@@ -1,0 +1,48 @@
+services:
+    liip_hello.world.controller:
+        class: Liip\HelloBundle\Controller\HelloController
+        arguments:
+            view: @fos_rest.view_handler
+            validator: @validator
+
+    liip_hello.extra.controller:
+        class: Liip\HelloBundle\Controller\ExtraController
+
+    liip_hello.rest.controller:
+        class: Liip\HelloBundle\Controller\RestController
+        arguments:
+            session: @session
+            formFactory: @form.factory
+
+    liip_hello.phpcr.controller:
+        class: Liip\HelloBundle\Controller\PHPCRController
+        calls:
+            - ['setContainer', [ @liip_hello.container ] ]
+
+    liip_hello.container:
+        parent: liip_container_wrapper.service
+        arguments:
+            index_0:
+                doctrine_phpcr.odm.document_manager: true
+                my_view: fos_rest.view_handler
+
+    liip_hello.vie.controller:
+        class: Liip\HelloBundle\Controller\VieController
+        arguments:
+            view: @fos_rest.view_handler
+            repository: @liip_hello.article.repository
+
+    liip_hello.article.repository:
+        class: Doctrine\ODM\PHPCR\DocumentRepository
+        factory_service: doctrine_phpcr.odm.document_manager
+        factory_method: getRepository
+        arguments:
+            document_class_name: Liip\HelloBundle\Document\Article
+
+    liip_hello.rss_handler:
+        class: Liip\HelloBundle\View\RSSViewHandler
+
+    liip_hello.view_handler:
+        parent: fos_rest.view_handler.default
+        calls:
+            - ['registerHandler', [ 'rss', [@liip_hello.rss_handler, 'createResponse'] ] ]

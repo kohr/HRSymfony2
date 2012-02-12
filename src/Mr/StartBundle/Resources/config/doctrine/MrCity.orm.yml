@@ -1,0 +1,37 @@
+Mr\StartBundle\Entity\MrCity:
+  type: entity
+  table: mr_city
+  fields:
+    id:
+      id: true
+      type: integer
+      unsigned: false
+      nullable: false
+      generator:
+        strategy: IDENTITY
+    name:
+      type: string
+      length: 250
+      fixed: false
+      nullable: false
+    created_at:
+      type: date
+      gedmo:
+        timestampable:
+          on: create
+    updated_at:
+      type: datetime
+      gedmo:
+        timestampable:
+          on: update
+  oneToOne:
+    province:
+      targetEntity: MrProvince
+      cascade: {  }
+      mappedBy: null
+      inversedBy: null
+      joinColumns:
+        province_id:
+          referencedColumnName: id
+      orphanRemoval: false
+  lifecycleCallbacks: {  }

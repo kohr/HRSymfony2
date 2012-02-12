@@ -1,0 +1,35 @@
+MrCity:
+  type: entity
+  table: mr_city
+  fields:
+    id:
+      id: true
+      type: integer
+      unsigned: false
+      nullable: false
+      generator:
+        strategy: IDENTITY
+    name:
+      type: string
+      length: 250
+      fixed: false
+      nullable: false
+    updatedAt:
+      type: datetime
+      nullable: false
+      column: updated_at
+    createdAt:
+      type: datetime
+      nullable: false
+      column: created_at
+  oneToOne:
+    province:
+      targetEntity: MrProvince
+      cascade: {  }
+      mappedBy: null
+      inversedBy: null
+      joinColumns:
+        province_id:
+          referencedColumnName: id
+      orphanRemoval: false
+  lifecycleCallbacks: {  }

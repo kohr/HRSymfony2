@@ -1,0 +1,37 @@
+Mr\StartBundle\Entity\MrDiplomaLevel:
+  type: entity
+  table: mr_diploma_level
+  gedmo:
+    translation:
+      locale: locale
+# using specific personal translation class:
+#     entity: Translatable\Fixture\CategoryTranslation
+  fields:
+    id:
+      id: true
+      type: integer
+      unsigned: false
+      nullable: false
+      generator:
+        strategy: IDENTITY
+    name:
+      type: string
+      length: 100
+      fixed: false
+      nullable: false
+      gedmo:
+        - translatable
+    age:
+      type: integer
+      nullable: true
+    created_at:
+      type: date
+      gedmo:
+        timestampable:
+          on: create
+    updated_at:
+      type: datetime
+      gedmo:
+        timestampable:
+          on: update
+  lifecycleCallbacks: {  }

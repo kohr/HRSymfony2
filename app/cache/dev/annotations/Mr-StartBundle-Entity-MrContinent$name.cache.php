@@ -1,0 +1,1 @@
+<?php return unserialize('a:1:{i:0;O:37:"Gedmo\\Mapping\\Annotation\\Translatable":1:{s:5:"value";N;}}');

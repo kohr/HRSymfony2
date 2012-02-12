@@ -1,0 +1,51 @@
+Mr\StartBundle\Entity\MrDiplomaType:
+  type: entity
+  table: mr_diploma_type
+  gedmo:
+    loggable: 
+      #logEntryClass: MrDiplomaTypeLog
+  fields:
+    id:
+      id: true
+      type: integer
+      unsigned: false
+      nullable: false
+      generator:
+        strategy: IDENTITY
+    name:
+      type: string
+      length: 100
+      fixed: false
+      nullable: false
+      gedmo:
+        - Versioned
+    created_at:
+      type: date
+      gedmo:
+        timestampable:
+          on: create
+    updated_at:
+      type: datetime
+      gedmo:
+        timestampable:
+          on: update
+  oneToOne:
+    level:
+      targetEntity: MrDiplomaLevel
+      cascade: {  }
+      mappedBy: null
+      inversedBy: null
+      joinColumns:
+        level_id:
+          referencedColumnName: id
+      orphanRemoval: false
+    country:
+      targetEntity: MrCountry
+      cascade: {  }
+      mappedBy: null
+      inversedBy: null
+      joinColumns:
+        country_id:
+          referencedColumnName: id
+      orphanRemoval: false
+  lifecycleCallbacks: {  }

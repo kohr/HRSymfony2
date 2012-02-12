@@ -1,0 +1,50 @@
+Mr\StartBundle\Entity\MrProvince:
+  type: entity
+  table: mr_province
+  fields:
+    id:
+      id: true
+      type: integer
+      unsigned: false
+      nullable: false
+      generator:
+        strategy: IDENTITY
+    name:
+      type: string
+      length: 250
+      fixed: false
+      nullable: false
+  oneToMany:
+    children:
+      nullable: true
+      targetEntity: MrProvince
+      mappedBy: parent
+  manyToOne:
+    parent:
+      nullable: true
+      targetEntity: MrProvince
+      inversedBy: children  
+  manyToMany:
+    nearby:
+      targetEntity: MrProvince
+      mappedBy: nearby
+      joinTable:
+        name: mrprovince_nearby
+        joinColumns:
+          name: item1:
+          referencedColumnName: id
+        inverseJoinColumns:
+          name: item2:
+          referencedColumnName: id
+  oneToOne:
+    country:
+      nullable: true
+      targetEntity: MrCountry
+      cascade: {  }
+      mappedBy: null
+      inversedBy: null
+      joinColumns:
+        country_id:
+          referencedColumnName: id
+      orphanRemoval: false
+  lifecycleCallbacks: {  }

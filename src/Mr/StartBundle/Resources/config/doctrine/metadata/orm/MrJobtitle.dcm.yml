@@ -1,0 +1,20 @@
+MrJobtitle:
+  type: entity
+  table: mr_jobtitle
+  fields:
+    id:
+      id: true
+      type: integer
+      unsigned: false
+      nullable: false
+      generator:
+        strategy: IDENTITY
+    updatedAt:
+      type: datetime
+      nullable: false
+      column: updated_at
+    createdAt:
+      type: datetime
+      nullable: false
+      column: created_at
+  lifecycleCallbacks: {  }

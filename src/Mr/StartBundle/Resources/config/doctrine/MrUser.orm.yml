@@ -1,0 +1,53 @@
+Mr\StartBundle\Entity\MrUser:
+  type: entity
+  table: mr_user
+  fields:
+    id:
+      id: true
+      type: integer
+      generator:
+        strategy: AUTO
+    firstname:
+      type: string
+      nullable: true
+    lastname:
+      type: string
+      nullable: true
+    facebookID:
+      type: string
+      nullable: true
+  oneToMany:
+    steps:
+      nullable: true
+      targetEntity: MrUserStep
+      mappedBy: user
+  manyToMany:
+    groups:
+      nullable: true
+      targetEntity: MrGroup
+      joinTable:
+        name: mrusers_mrgroups
+        joinColumns:
+          user_id:
+            referencedColumnName: id
+        inverseJoinColumns:
+          group_id:
+            referencedColumnName: id
+    myFriends:
+      targetEntity: MrUser
+      inversedBy: friendsWithMe
+      joinTable:
+        name: mrusers_friends
+        joinColumns:
+          user_id:
+            referencedColumnName: id
+        inverseJoinColumns:
+          friend_id:
+            referencedColumnName: id
+    friendsWithMe:
+      targetEntity: MrUser
+      mappedBy: myFriends
+    acquaintance:
+      targetEntity: MrUserStep
+      mappedBy: acquaintance
+  lifecycleCallbacks: {  }

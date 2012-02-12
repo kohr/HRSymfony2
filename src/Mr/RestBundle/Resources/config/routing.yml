@@ -1,0 +1,47 @@
+mr_hello:
+    pattern:  /mr/hello/{name}.{_format}
+    defaults: { _controller: mr_hello.world.controller:indexAction, _format: html }
+
+mr_hello_fallback:
+    pattern:  /mr/hello.{_format}
+    defaults: { _controller: mr_hello.world.controller:indexAction, _format: html }
+
+mr_hello_serializer:
+    pattern:  /mr/serializer.{_format}
+    defaults: { _controller: mr_hello.world.controller:serializerAction, _format: json }
+
+mr_hello_facebook:
+    pattern:  /mr/facebook
+    defaults: { _controller: mr_hello.world.controller:facebookAction, _format: html }
+
+mr_hello_exception:
+    pattern:  /mr/exception.{_format}
+    defaults: { _controller: mr_hello.world.controller:exceptionAction, _format: html }
+
+mr_hello_validation_failure:
+    pattern:  /mr/validation_failure.json
+    defaults: { _controller: mr_hello.world.controller:validationFailureAction, _format: json }
+
+mr_hello_facebook_check:
+    pattern:  /mr/facebook-check
+    defaults: { _controller: mr_hello.world.controller:facebookAction, _format: html }
+
+mr_hello_facebook_logout:
+    pattern:  /mr/facebook-logout
+    defaults: { _controller: mr_hello.world.controller:facebookAction, _format: html }
+
+mr_hello_phpcr:
+    pattern:  /mr/phpcr/{title}
+    defaults: { _controller: mr_hello.phpcr.controller:indexAction, _format: html }
+
+mr_hello_vie_article:
+    pattern:  /mr/hello/vie/{id}
+    defaults: { _controller: mr_hello.vie.controller:articleAction, _format: html }
+
+mr_hello_hyphenator:
+    pattern:  /mr/hyphenator
+    defaults: { _controller: mr_hello.world.controller:hyphenatorAction, _format: html }
+
+mr_hello_custom_handler:
+    pattern:  /mr/customHandler.{_format}
+    defaults: { _controller: mr_hello.world.controller:customHandlerAction, _format: rss }

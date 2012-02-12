@@ -1,0 +1,188 @@
+imports:
+    - { resource: parameters.ini }
+    - { resource: security.yml }
+
+framework:
+    #esi:             ~
+    #translator:      { fallback: en }
+    secret:          %secret%
+    charset:         UTF-8
+    router:          { resource: "%kernel.root_dir%/config/routing.yml" }
+    form:            true
+    csrf_protection: true
+    validation:      { enable_annotations: true }
+    templating:      { engines: ['twig'] } #assets_version: SomeVersionScheme
+    session:
+        default_locale: %locale%
+        auto_start:     true
+
+# Twig Configuration
+twig:
+    debug:            %kernel.debug%
+    strict_variables: %kernel.debug%
+
+# Assetic Configuration
+assetic:
+    debug:          %kernel.debug%
+    use_controller: false
+    filters:
+        cssrewrite: ~
+        # closure:
+        #     jar: %kernel.root_dir%/java/compiler.jar
+        # yui_css:
+        #     jar: %kernel.root_dir%/java/yuicompressor-2.4.2.jar
+
+# Doctrine Configuration
+doctrine:
+    dbal:
+        driver:   %database_driver%
+        host:     %database_host%
+        port:     %database_port%
+        dbname:   %database_name%
+        user:     %database_user%
+        password: %database_password%
+        charset:  UTF8
+
+    orm:
+        auto_generate_proxy_classes: %kernel.debug%
+        auto_mapping: true
+        mappings:
+            StofDoctrineExtensionsBundle: true
+
+# Swiftmailer Configuration
+swiftmailer:
+    transport: %mailer_transport%
+    host:      %mailer_host%
+    username:  %mailer_user%
+    password:  %mailer_password%
+
+jms_security_extra:
+    secure_controllers:  true
+    secure_all_services: false
+
+
+#MrUser
+fos_user:
+    db_driver: orm
+    firewall_name: main
+    user_class: Mr\StartBundle\Entity\MrUser
+    group:
+        group_class: Mr\StartBundle\Entity\MrGroup
+
+#Stof
+stof_doctrine_extensions:
+    default_locale: en_US
+    orm:
+        default:
+            tree:           false
+            timestampable:  true
+            sluggable:      true
+            translatable:   true
+            loggable:       true
+
+#FOS
+fos_facebook:
+    file:   %kernel.root_dir%/../vendor/facebook/src/facebook.php
+    alias:  facebook
+    app_id: 137717242971287
+    secret: b75c33b661c5c671d0449ed7cb2a2803
+    cookie: true
+    permissions: [email, user_birthday, user_location]
+fos_rest:
+    routing_loader:
+        default_format: json
+
+#Avalanche
+#avalanche_imagine:
+#    filters:
+#        my_thumb:
+#            type:    thumbnail
+#            options: { size: [120, 90], mode: outbound }
+#sitemap.config:
+#    base_url: "http://www.millionroads.com/"
+    
+    
+#Admin
+services:
+    #user
+    mr.start.admin.user:
+        class: Mr\StartBundle\Admin\MrUserAdmin
+        tags: 
+            - { name: sonata.admin, manager_type: orm, group: User, label: User }
+        arguments: [null, Mr\StartBundle\Entity\MrUser, MrStartBundle:MrUserAdmin]
+    mr.start.admin.group:
+        class: Mr\StartBundle\Admin\MrGroupAdmin
+        tags: 
+            - { name: sonata.admin, manager_type: orm, group: User, label: Group }
+        arguments: [null, Mr\StartBundle\Entity\MrGroup, MrStartBundle:MrGroupAdmin]
+    mr.start.admin.userstep:
+        class: Mr\StartBundle\Admin\MrUserStepAdmin
+        tags: 
+            - { name: sonata.admin, manager_type: orm, group: User, label: User_step }
+        arguments: [null, Mr\StartBundle\Entity\MrUserStep, MrStartBundle:MrUserStepAdmin]
+    #area
+    mr.start.admin.area:
+        class: Mr\StartBundle\Admin\MrAreaAdmin
+        tags: 
+            - { name: sonata.admin, manager_type: orm, group: Area, label: Area }
+        arguments: [null, Mr\StartBundle\Entity\MrArea, MrStartBundle:MrAreaAdmin]
+    #job
+    mr.start.admin.job:
+        class: Mr\StartBundle\Admin\MrJobAdmin
+        tags: 
+            - { name: sonata.admin, manager_type: orm, group: Job, label: Job }
+        arguments: [null, Mr\StartBundle\Entity\MrJob, MrStartBundle:MrJobAdmin]
+    #diploma
+    mr.start.admin.diploma:
+        class: Mr\StartBundle\Admin\MrDiplomaAdmin
+        tags: 
+            - { name: sonata.admin, manager_type: orm, group: Diploma, label: Diploma }
+        arguments: [null, Mr\StartBundle\Entity\MrDiploma, MrStartBundle:MrDiplomaAdmin]
+    mr.start.admin.diplomatype:
+        class: Mr\StartBundle\Admin\MrDiplomaTypeAdmin
+        tags: 
+            - { name: sonata.admin, manager_type: orm, group: Diploma, label: Diploma_type }
+        arguments: [null, Mr\StartBundle\Entity\MrDiplomaType, MrStartBundle:MrDiplomaTypeAdmin]
+    mr.start.admin.diplomalevel:
+        class: Mr\StartBundle\Admin\MrDiplomaLevelAdmin
+        tags: 
+            - { name: sonata.admin, manager_type: orm, group: Diploma, label: Diploma_level }
+        arguments: [null, Mr\StartBundle\Entity\MrDiplomaLevel, MrStartBundle:MrDiplomaLevelAdmin]
+    #location
+    mr.start.admin.location:
+        class: Mr\StartBundle\Admin\MrLocationAdmin
+        tags: 
+            - { name: sonata.admin, manager_type: orm, group: Location, label: Location }
+        arguments: [null, Mr\StartBundle\Entity\MrLocation, MrStartBundle:MrLocationAdmin]
+    mr.start.admin.city:
+        class: Mr\StartBundle\Admin\MrCityAdmin
+        tags: 
+            - { name: sonata.admin, manager_type: orm, group: Location, label: City }
+        arguments: [null, Mr\StartBundle\Entity\MrCity, MrStartBundle:MrCityAdmin]
+    mr.start.admin.province:
+        class: Mr\StartBundle\Admin\MrProvinceAdmin
+        tags: 
+            - { name: sonata.admin, manager_type: orm, group: Location, label: Province }
+        arguments: [null, Mr\StartBundle\Entity\MrProvince, MrStartBundle:MrProvinceAdmin]
+    mr.start.admin.country:
+        class: Mr\StartBundle\Admin\MrCountryAdmin
+        tags: 
+            - { name: sonata.admin, manager_type: orm, group: Location, label: Country }
+        arguments: [null, Mr\StartBundle\Entity\MrCountry, MrStartBundle:MrCountryAdmin]
+    mr.start.admin.continent:
+        class: Mr\StartBundle\Admin\MrContinentAdmin
+        tags: 
+            - { name: sonata.admin, manager_type: orm, group: Location, label: Continent }
+        arguments: [null, Mr\StartBundle\Entity\MrContinent, MrStartBundle:MrContinentAdmin]
+    #map
+    mr.graph.admin.map:
+        class: Mr\GraphBundle\Admin\MrMapAdmin
+        tags: 
+            - { name: sonata.admin, manager_type: orm, group: Graph, label: Map }
+        arguments: [null, Mr\GraphBundle\Entity\MrMap, MrGraphBundle:MrMapAdmin]
+    #graph
+    mr.graph.admin.graph:
+        class: Mr\GraphBundle\Admin\MrGraphAdmin
+        tags: 
+            - { name: sonata.admin, manager_type: orm, group: Graph, label: Graph }
+        arguments: [null, Mr\GraphBundle\Entity\MrGraph, MrGraphBundle:MrGraphAdmin]

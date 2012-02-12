@@ -1,0 +1,27 @@
+MrUserStep:
+  type: entity
+  table: mr_user_step
+  fields:
+    id:
+      id: true
+      type: integer
+      unsigned: false
+      nullable: false
+      generator:
+        strategy: IDENTITY
+    stepId:
+      type: integer
+      unsigned: false
+      nullable: false
+      column: step_id
+    stepType:
+      type: integer
+      unsigned: false
+      nullable: false
+      column: step_type
+    locationId:
+      type: integer
+      unsigned: false
+      nullable: false
+      column: location_id
+  lifecycleCallbacks: {  }

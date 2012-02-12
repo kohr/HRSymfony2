@@ -1,0 +1,1 @@
+<?php return unserialize('a:1:{i:0;O:42:"FOS\\RestBundle\\Controller\\Annotations\\View":2:{s:11:"' . "\0" . '*' . "\0" . 'template";N;s:7:"' . "\0" . '*' . "\0" . 'vars";a:0:{}}}');

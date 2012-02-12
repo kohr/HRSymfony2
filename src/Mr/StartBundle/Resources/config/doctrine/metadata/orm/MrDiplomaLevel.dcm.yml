@@ -1,0 +1,23 @@
+MrDiplomaLevel:
+  type: entity
+  table: mr_diploma_level
+  fields:
+    id:
+      id: true
+      type: integer
+      unsigned: false
+      nullable: false
+      generator:
+        strategy: IDENTITY
+    age:
+      type: integer
+      nullable: true
+    updatedAt:
+      type: datetime
+      nullable: false
+      column: updated_at
+    createdAt:
+      type: datetime
+      nullable: false
+      column: created_at
+  lifecycleCallbacks: {  }

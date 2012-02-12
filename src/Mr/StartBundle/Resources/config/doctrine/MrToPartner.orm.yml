@@ -1,0 +1,40 @@
+Mr\StartBundle\Entity\MrToPartner:
+  type: entity
+  table: mr_to_partner
+  fields:
+    id:
+      id: true
+      type: integer
+      unsigned: false
+      nullable: false
+      generator:
+        strategy: IDENTITY
+    mr_object_id:
+      type: integer
+    mr_object_name:
+      type: string
+      length: 20
+    partner_id:
+      type: integer
+    partner_object_id:
+      type: integer
+    created_at:
+      type: date
+      gedmo:
+        timestampable:
+          on: create
+    updated_at:
+      type: datetime
+      gedmo:
+        timestampable:
+          on: update
+  oneToOne:
+    location:
+      nullable: true
+      targetEntity: MrPartner
+      cascade: {  }
+      joinColumns:
+        partner_id:
+          referencedColumnName: id
+      orphanRemoval: true
+  lifecycleCallbacks: {  }

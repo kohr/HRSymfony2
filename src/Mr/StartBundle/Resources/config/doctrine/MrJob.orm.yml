@@ -1,0 +1,46 @@
+Mr\StartBundle\Entity\MrJob:
+  type: entity
+  table: mr_job
+  gedmo:
+    translation:
+      locale: locale
+# using specific personal translation class:
+#     entity: Translatable\Fixture\CategoryTranslation
+    loggable: 
+      #logEntryClass: MrDiplomaLog
+  fields:
+    id:
+      id: true
+      type: integer
+      unsigned: false
+      nullable: false
+      generator:
+        strategy: IDENTITY
+    name:
+      type: string
+      length: 250
+      fixed: false
+      nullable: false
+      gedmo:
+        - translatable
+    created_at:
+      type: date
+      gedmo:
+        timestampable:
+          on: create
+    updated_at:
+      type: datetime
+      gedmo:
+        timestampable:
+          on: update
+  manyToMany:
+    areas:
+      targetEntity: MrArea
+      inversedBy: job_id
+      joinColumns:
+        job_id:
+          referencedColumnName: id
+      inverseJoinColumns:
+        area_id:
+          referencedColumnName: id
+  lifecycleCallbacks: {  }

@@ -1,0 +1,32 @@
+Mr\StartBundle\Entity\MrPartner:
+  type: entity
+  table: mr_partner
+  fields:
+    id:
+      id: true
+      type: integer
+      unsigned: false
+      nullable: false
+      generator:
+        strategy: IDENTITY
+    name:
+      type: string
+      length: 20
+    url:
+      type: string
+      length: 150
+    email:
+      type: string
+      length: 150
+    created_at:
+      type: date
+      gedmo:
+        timestampable:
+          on: create
+    updated_at:
+      type: datetime
+      gedmo:
+        timestampable:
+          on: update
+      orphanRemoval: false
+  lifecycleCallbacks: {  }

@@ -1,0 +1,51 @@
+Mr\StartBundle\Entity\MrCountry:
+  type: entity
+  table: mr_country
+  fields:
+    id:
+      id: true
+      type: integer
+      unsigned: false
+      nullable: false
+      generator:
+        strategy: IDENTITY
+    name:
+      type: string
+      length: 250
+      fixed: false
+      nullable: false
+    code:
+      type: string
+      length: 5
+      fixed: false
+      nullable: false
+  oneToMany:
+    children:
+      targetEntity: MrCountry
+      mappedBy: parent
+    nearby:
+      targetEntity: MrCountry
+      mappedBy: nearby
+      joinTable:
+        name: mrcountry_nearby
+        joinColumns:
+          name: item1:
+          referencedColumnName: id
+        inverseJoinColumns:
+          name: item2:
+          referencedColumnName: id
+  manyToOne:
+    parent:
+      targetEntity: MrCountry
+      inversedBy: children  
+  oneToOne:
+    continent:
+      targetEntity: MrContinent
+      cascade: {  }
+      mappedBy: null
+      inversedBy: null
+      joinColumns:
+        continent_id:
+          referencedColumnName: id
+      orphanRemoval: false
+  lifecycleCallbacks: {  }

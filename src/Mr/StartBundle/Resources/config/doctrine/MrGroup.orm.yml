@@ -1,0 +1,15 @@
+Mr\StartBundle\Entity\MrGroup:
+  type: entity
+  table: mr_group
+  fields:
+    id:
+      id: true
+      type: integer
+      generator:
+        strategy: IDENTITY
+  manyToMany:
+    users:
+      nullable: true
+      targetEntity: MrUser
+      mappedBy: groups
+  lifecycleCallbacks: {  }

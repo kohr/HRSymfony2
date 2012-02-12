@@ -1,0 +1,58 @@
+Mr\StartBundle\Entity\MrLocation:
+  type: entity
+  table: mr_location
+  fields:
+    id:
+      id: true
+      type: integer
+      unsigned: false
+      nullable: false
+      generator:
+        strategy: IDENTITY
+
+    name:
+      type: string
+      length: 250
+    adress:
+      type: string
+      length: 250
+    zipcode:
+      type: integer
+    url:
+      type: string
+      length: 250
+    email:
+      type: string
+    twitterhash:
+      type: string
+    created_at:
+      type: date
+      gedmo:
+        timestampable:
+          on: create
+    updated_at:
+      type: datetime
+      gedmo:
+        timestampable:
+          on: update
+  oneToMany:
+    children:
+      nullable: true
+      targetEntity: MrLocation
+      mappedBy: parent
+  manyToOne:
+    parent:
+      nullable: true
+      targetEntity: MrLocation
+      inversedBy: children  
+  manyToOne:
+    city:
+      targetEntity: MrCity
+      cascade: {  }
+      mappedBy: null
+      inversedBy: null
+      joinColumns:
+        city_id:
+          referencedColumnName: id
+      orphanRemoval: false
+  lifecycleCallbacks: {  }

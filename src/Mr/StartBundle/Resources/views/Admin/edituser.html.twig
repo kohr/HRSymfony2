@@ -1,0 +1,7 @@
+{# note the form_enctype, without it the form will not bind in the controller #}
+<form action="" method="post" {{ form_enctype(form) }}>
+{{ form_widget(form) }}
+<input type="submit" class="submit" id="form_submit" value="Save" />
+</form>
+
+User Experiences

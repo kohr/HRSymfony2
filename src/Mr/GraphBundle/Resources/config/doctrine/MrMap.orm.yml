@@ -1,0 +1,20 @@
+Mr\GraphBundle\Entity\MrMap:
+  type: entity
+  table: mr_map
+  fields:
+    id:
+      id: true
+      type: integer
+      generator:
+        strategy: IDENTITY
+    prev_type:
+      type: string
+    prev_id:
+      type: integer
+    next_type:
+      type: string
+    next_id:
+      type: integer
+    forbidden:
+      type: boolean
+  lifecycleCallbacks: {  }
